@@ -102,7 +102,7 @@ const config: webpack.Configuration = {
     runtimeChunk: true,
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
+    // new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new HtmlWebpackPlugin({
       filename: './tokener.html',
       template: './public/tokener.html',

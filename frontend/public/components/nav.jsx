@@ -319,6 +319,7 @@ export const Navigation = ({ isNavOpen, onNavSelect }) => {
 
         <NavSection title="Catalog">
           <HrefLink href="/catalog" name="Developer Catalog" activePath="/catalog/" />
+          <HrefLink href="/launch" name="Launcher" activePath="/launch/" />
           <ResourceNSLink model={ClusterServiceVersionModel} resource={ClusterServiceVersionModel.plural} name="Installed Operators" />
           <HrefLink
             href="/provisionedservices"

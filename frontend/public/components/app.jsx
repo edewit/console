@@ -27,6 +27,8 @@ import k8sActions, { types } from '../module/k8s/k8s-actions';
 import '../vendor.scss';
 import '../style.scss';
 
+import { Launcher } from './launcher/launcher-page';
+
 //PF4 Imports
 import {
   Page,
@@ -180,6 +182,7 @@ class App extends React.PureComponent {
                   <LazyRoute path="/catalog/all-namespaces" exact loader={() => import('./catalog/catalog-page' /* webpackChunkName: "catalog" */).then(m => m.CatalogPage)} />
                   <LazyRoute path="/catalog/ns/:ns" exact loader={() => import('./catalog/catalog-page' /* webpackChunkName: "catalog" */).then(m => m.CatalogPage)} />
                   <Route path="/catalog" exact component={NamespaceRedirect} />
+                  <Route path="/launch" exact component={Launcher}/>
 
                   <LazyRoute path="/provisionedservices/all-namespaces" loader={() => import('./provisioned-services' /* webpackChunkName: "provisionedservices" */).then(m => m.ProvisionedServicesPage)} />
                   <LazyRoute path="/provisionedservices/ns/:ns" loader={() => import('./provisioned-services' /* webpackChunkName: "provisionedservices" */).then(m => m.ProvisionedServicesPage)} />
