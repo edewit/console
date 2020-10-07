@@ -231,7 +231,7 @@ export async function startServer(): Promise<FastifyInstance> {
 
     await fastify.register(fastifyCompress)
 
-    await fastify.register(fastifyHelmet)
+    // await fastify.register(fastifyHelmet)
 
     // await fastify.register(fastifyEtag)
 
@@ -246,7 +246,7 @@ export async function startServer(): Promise<FastifyInstance> {
             ProviderConnectionsResolver,
             BareMetalAssetResolver,
         ],
-        emitSchemaFile: true,
+        emitSchemaFile: !['production', 'test'].includes(process.env.NODE_ENV),
     })
     await fastify.register(fastifyGQL, {
         graphiql: 'playground',
@@ -279,11 +279,11 @@ export async function startServer(): Promise<FastifyInstance> {
         },
     })
 
-    // fastify.setNotFoundHandler((request, response) => {
-    //     void response.code(200).sendFile('index.html', join(__dirname, '../public'))
-    // })
+    fastify.setNotFoundHandler((request, response) => {
+        void response.code(200).sendFile('index.html', join(__dirname, '../public'))
+    })
     await fastify.register(fastifyStatic, {
-        root: join(__dirname, '../public'),
+        root: join(__dirname, 'public'),
         // prefix: '/public/', // optional: default '/'
     })
 
@@ -293,7 +293,7 @@ export async function startServer(): Promise<FastifyInstance> {
             logger.error('shutdown timeout')
             // eslint-disable-next-line no-process-exit
             process.exit(1)
-        }, 5 * 1000).unref()
+        }, 60 * 1000).unref()
         done()
     })
 
