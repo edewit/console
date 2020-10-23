@@ -350,6 +350,7 @@ export async function startServer(): Promise<FastifyInstance> {
         emitSchemaFile: !['production', 'test'].includes(process.env.NODE_ENV),
     })
     await fastify.register(fastifyGQL, {
+        path: '/cluster-management/graphql',
         graphiql: 'playground',
         schema,
         jit: 1,
