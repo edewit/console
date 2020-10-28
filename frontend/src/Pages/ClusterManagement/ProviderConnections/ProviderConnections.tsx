@@ -1,5 +1,5 @@
 import {
-    AcmEmptyPage,
+    AcmEmptyState,
     AcmLoadingPage,
     AcmPageCard,
     AcmTable,
@@ -49,11 +49,11 @@ export function ProviderConnectionsPageContent() {
         return <ErrorPage error={error} />
     } else if (!data?.providerConnections || data.providerConnections.length === 0) {
         return (
-            <AcmEmptyPage
+            <AcmPageCard><AcmEmptyState
                 title={t('empty.title')}
                 message={t('empty.subtitle')}
                 action={t('add')}
-            />
+            /></AcmPageCard>
         )
     }
     return (
