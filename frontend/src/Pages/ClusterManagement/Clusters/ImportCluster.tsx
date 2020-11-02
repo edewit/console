@@ -101,14 +101,14 @@ errors && console.log('errors', errors)
                     label={t('import.form.cloud.label')}
                     value={cloudLabel}
                     onChange={(label) => setCloudLabel(label ?? '')}
-                    options={['auto-detect', 'AWS', 'GCP', 'Azure', 'IBM', 'VMWare', 'Datacenter', 'Baremetal']}
+                    // options={['auto-detect', 'AWS', 'GCP', 'Azure', 'IBM', 'VMWare', 'Datacenter', 'Baremetal']}
                 />
                 <AcmSelect
                     id="environmentLabel"
                     label={t('import.form.environment.label')}
                     value={environmentLabel}
                     onChange={setEnvironmentLabel}
-                    options={['dev', 'prod', 'qa']}
+                    // options={['dev', 'prod', 'qa']}
                     placeholder={t('import.form.environment.placeholder')}
                 />
                 <AcmLabelsInput

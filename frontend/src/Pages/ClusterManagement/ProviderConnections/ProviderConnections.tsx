@@ -1,5 +1,5 @@
 import {
-    AcmEmptyPage,
+    AcmEmptyState,
     AcmLoadingPage,
     AcmPageCard,
     AcmTable,
@@ -39,7 +39,11 @@ export function ProviderConnectionsPageContent() {
     } else if (error) {
         return <ErrorPage error={error} />
     } else if (!data?.items || data.items.length === 0) {
-        return <AcmEmptyPage title={t('empty.title')} message={t('empty.subtitle')} action={t('add')} />
+        return (
+            <AcmPageCard>
+                <AcmEmptyState title={t('empty.title')} message={t('empty.subtitle')} action={t('add')} />
+            </AcmPageCard>
+        )
     }
 
     // const { loading, error, data, startPolling, stopPolling, refresh } = DeleteProviderConnection()
@@ -154,6 +158,10 @@ export function ProviderConnectionsTable(props: {
                         },
                     },
                 ]}
+                emptyState={{
+                    title: 'TODO',
+                    message: 'TODO',
+                }}
             />
         </AcmPageCard>
     )
