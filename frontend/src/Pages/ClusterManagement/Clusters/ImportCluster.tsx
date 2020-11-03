@@ -98,6 +98,7 @@ errors && console.log('errors', errors)
                 />
                 <AcmSelect
                     id="cloudLabel"
+                    toggleId="cloudLabel-button"
                     label={t('import.form.cloud.label')}
                     value={cloudLabel}
                     onChange={(label) => setCloudLabel(label ?? '')}
@@ -105,6 +106,7 @@ errors && console.log('errors', errors)
                 />
                 <AcmSelect
                     id="environmentLabel"
+                    toggleId="environmentLabel-button"
                     label={t('import.form.environment.label')}
                     value={environmentLabel}
                     onChange={setEnvironmentLabel}
