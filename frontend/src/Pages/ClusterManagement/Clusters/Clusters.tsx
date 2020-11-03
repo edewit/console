@@ -152,7 +152,6 @@ export function ClustersTable(props: {
                 { id: 'searchCluster', title: 'Search cluster', click: (managedCluster) => {} },
                 { id: 'detachCluster', title: 'Detach cluster', click: (managedCluster) => {} },
             ]}
-            emptyState={<AcmEmptyState title="No managed clusters found" />}
         />
     )
 }
