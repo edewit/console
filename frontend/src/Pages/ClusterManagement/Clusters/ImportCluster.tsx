@@ -43,7 +43,7 @@ export function ImportClusterPageContent(props: {
     const [additionalLabels, setAdditionaLabels] = useState<string[] | undefined>([])
     const [importCommand, setImportCommand] = useState<string>('')
     const [errors, setErrors] = useState<any>()
-errors && console.log('errors', errors)
+
     const onSubmit = async () => {
         const clusterLabels = { cloud: cloudLabel ?? '', vendor: 'auto-detect', name: clusterName, environment: environmentLabel ?? '' }
         const projectResponse = await createProject(clusterName)
