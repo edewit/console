@@ -117,6 +117,7 @@ export function ClustersTable(props: {
     const history = useHistory()
     return (
         <AcmTable<ManagedCluster>
+            emptyState={<AcmEmptyState title="No managed clusters found" />}
             plural="clusters"
             items={props.managedClusters}
             columns={columns}
