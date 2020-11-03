@@ -175,7 +175,6 @@ export function ProviderConnectionsTable(props: {
                         },
                     },
                 ]}
-                emptyState={<AcmEmptyState title={t('empty.title')} />}
             />
         </AcmPageCard>
     )
