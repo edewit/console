@@ -81,7 +81,7 @@ export interface IResourceList<Resource extends IResource> {
     items: Resource[]
 }
 
-async function restRequest<T>(method: Method, url: string, data?: object): Promise<AxiosResponse<T>> {
+export async function restRequest<T>(method: Method, url: string, data?: object): Promise<AxiosResponse<T>> {
     return await Axios.request<T>({ method, url, data, responseType, withCredentials, validateStatus: () => true })
 }
 
@@ -123,9 +123,19 @@ export function resourceMethods<Resource extends IResource>(options: { path: str
         getNamespaceResource: function getSingleNamespaceResource(namespace: string, name: string) {
             let url = root
             url += `/namespaces/${namespace}/${options.plural}/${name}`
-            return restRequest<ResourceList<Resource>>('GET', url)
+            return restRequest<Resource>('GET', url)
         }
     }
+}
+
+export function deleteCreatedResources(resources: AxiosResponse[]) {
+    return Promise.all(resources.map(resource => {
+        /* istanbul ignore else */
+        if (resource.status !== 409) {
+            const url = `${resource.config.url}/${resource.data.details.name}`
+            return restRequest<IResource>('DELETE', url)
+        }
+    }))
 }
 
 export function getResourceName(resource: Partial<IResource>) {
