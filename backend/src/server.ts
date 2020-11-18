@@ -124,7 +124,6 @@ export async function startServer(): Promise<FastifyInstance> {
             const result = await kubeRequest(token, req.method, process.env.CLUSTER_API_URL + url + query, req.body)
             return res.code(result.status).send(result.data)
         } catch (err) {
-            console.error(err)
             logError('proxy error', err, { method: req.method, url: req.url })
             void res.code(500).send(err)
         }
@@ -134,7 +133,7 @@ export async function startServer(): Promise<FastifyInstance> {
     /* istanbul ignore next */
     if (process.env.NODE_ENV === 'development') {
         const acmUrl = process.env.CLUSTER_API_URL.replace('api', 'multicloud-console.apps').replace(':6443', '')
-        fastify.register(fastifyReplyFrom, {
+        await fastify.register(fastifyReplyFrom, {
             base: acmUrl,
         })
 
@@ -146,10 +145,9 @@ export async function startServer(): Promise<FastifyInstance> {
         fastify.all('/cluster-management/header', async (req, res) => {
             let headerResponse: AxiosResponse
             try {
+                const isDevelopment = process.env.NODE_ENV === 'development' ? 'true' : 'false'
                 headerResponse = await Axios.request({
-                    url: `${acmUrl}/multicloud/header/api/v1/header?serviceId=mcm-ui&dev=${
-                        process.env.NODE_ENV === 'development'
-                    }`,
+                    url: `${acmUrl}/multicloud/header/api/v1/header?serviceId=mcm-ui&dev=${isDevelopment}`,
                     method: 'GET',
                     httpsAgent: new https.Agent({ rejectUnauthorized: false }),
                     headers: {
@@ -187,7 +185,7 @@ export async function startServer(): Promise<FastifyInstance> {
 
             try {
                 const clusteredRequest = await clusteredRequestPromise
-                return res.code(200).send(clusteredRequest.data)
+                return res.code(clusteredRequest.status).send(clusteredRequest.data)
             } catch {
                 // DO NOTHING - WILL QUERY BY PROJECTS
             }
